@@ -167,6 +167,30 @@ export class PaperMC {
   }
 
   /**
+   * Get a Project's Version Family Info
+   * @description Get information about a specific project's version family
+   * @param project The project to get information about
+   * @param family The version group family to get information about
+   * @returns The project version family information
+   */
+  public static async getVersionFamily(project: Project, family: Family): Promise<VersionFamilyResponse> {
+    const { data } = await paperAPIInstance.get<VersionFamilyResponse>(`/projects/${project}/version_group/${family}`)
+    return data
+  }
+
+  /**
+   * Get a Project's Version Family Builds List
+   * @description Get a list of all builds for a specific project's version family
+   * @param project The project to get builds for
+   * @param family The version group family to get builds for
+   * @returns The list of builds for the version family
+   */
+  public static async getVersionFamilyBuilds(project: Project, family: Family): Promise<VersionFamilyBuildsResponse> {
+    const { data } = await paperAPIInstance.get<VersionFamilyBuildsResponse>(`/projects/${project}/version_group/${family}/builds`)
+    return data
+  }
+
+  /**
    * Get Latest Build for a Project Version
    * @description Get the latest build for a specific project's version
    * @param project The project to get the latest build
